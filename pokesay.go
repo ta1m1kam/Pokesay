@@ -31,9 +31,9 @@ func (poke *Poke) GetPoke(thoughts rune) (string, error) {
 	}
 
 	r := strings.NewReplacer(
-		"\\\\", "\\",
-		"\\@", "@",
-		"\\$", "$",
+		//"\\\\", "\\",
+		//"\\@", "@",
+		//"\\$", "$",
 		"$thoughts", string(thoughts),
 		"${thoughts}", string(thoughts),
 		)
