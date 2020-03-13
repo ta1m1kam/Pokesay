@@ -49,7 +49,11 @@ func pokes_pikachu_cow() ([]byte, error) {
 func Asset(name string) ([]byte, error) {
 	cannonicalName := strings.Replace(name, "\\", "/", -1)
 	if f, ok := _bindata[cannonicalName]; ok {
-		return f()
+		a, err := f()
+		if err != nil {
+			panic(err)
+		}
+		return a, nil
 	}
 	return nil, fmt.Errorf("Asset %s not found", name)
 }

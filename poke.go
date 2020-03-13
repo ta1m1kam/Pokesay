@@ -1,6 +1,9 @@
 package pokesay
 
-import "github.com/pkg/errors"
+import (
+	"github.com/pkg/errors"
+	"strings"
+)
 
 type Poke struct {
 	phrase string
@@ -41,6 +44,13 @@ func Thinking() Option {
 func Type(s string) Option {
 	if s == "" {
 		s = "pokes/Pikachu.cow"
+	}
+
+	if !strings.HasSuffix(s, ".cow") {
+		s += ".cow"
+	}
+	if !strings.HasPrefix(s, "pokes/") {
+		s = "pokes/" + s
 	}
 
 	return func(poke *Poke) error {
