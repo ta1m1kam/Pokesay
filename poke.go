@@ -14,8 +14,7 @@ type Poke struct {
 func NewPoke(options ...Option) (*Poke, error) {
 	poke := &Poke{
 		phrase: "",
-		typ: "pokes/Pikachu.cow",
-		thinking: false,
+		typ: "pokes/Pikachu.png",
 	}
 
 	for _, o := range options {
@@ -44,14 +43,14 @@ func Thinking() Option {
 
 func Type(s string) Option {
 	if s == "" {
-		s = "pokes/Pikachu.cow"
+		s = "images/Pikachu.png"
 	}
 
-	if !strings.HasSuffix(s, ".cow") {
-		s += ".cow"
+	if !strings.HasSuffix(s, ".png") {
+		s += ".png"
 	}
 	if !strings.HasPrefix(s, "pokes/") {
-		s = "pokes/" + s
+		s = "images/" + s
 	}
 
 	return func(poke *Poke) error {

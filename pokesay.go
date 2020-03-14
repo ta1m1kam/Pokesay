@@ -1,8 +1,10 @@
 package pokesay
 
 import (
-	"github.com/k0kubun/pp"
-	"strings"
+	"github.com/TaigaMikami/pokesay/balloon"
+	"github.com/TaigaMikami/pokesay/img2xterm"
+	"image"
+	"os"
 )
 
 func Say(options ...Option) (string, error) {
@@ -11,49 +13,46 @@ func Say(options ...Option) (string, error) {
 		return "", err
 	}
 
-	mon, err := poke.GetPoke(0)
+	pokemon, err := poke.GetPoke()
 	if err != nil {
 		return "", err
 	}
 
-	return mon, nil
+	balloon, err := poke.GetBalloon()
+	if err != nil {
+		return "", err
+	}
+
+	return balloon + pokemon, nil
 }
 
-func (poke *Poke) GetPoke(thoughts rune) (string, error) {
-	src, err := Asset(poke.typ)
+func (poke *Poke) GetPoke() (string, error) {
+	file, _ := os.Open("images/Bulbasaur.png")
+	img, _, err := image.Decode(file)
 	if err != nil {
 		return "", err
 	}
+	pokemon := img2xterm.Img2xterm(img)
+	return pokemon, nil
+}
 
-	pp.Print(poke)
-	if thoughts == 0 {
-		if poke.thinking {
-			thoughts = 'o'
-		} else {
-			thoughts = '\\'
-		}
+func (poke *Poke) GetBalloon() (string, error) {
+	var thoughts string
+	if poke.thinking {
+		thoughts = `         o
+          o
+`
+	} else {
+		thoughts = `         \
+          \
+`
 	}
 
-	r := strings.NewReplacer(
-		"\\\\", "\\",
-		"\\@", "@",
-		"\\$", "$",
-		"$thoughts", string(thoughts),
-		"${thoughts}", string(thoughts),
-		)
-	newsrc := r.Replace(string(src))
-	separate := strings.Split(newsrc, "\n")
-	mon := make([]string, 0, len(separate))
-	for _, line := range separate {
-		if strings.Contains(line, "$the_cow = <<EOC") || strings.HasPrefix(line, "##") {
-			continue
-		}
-
-		if strings.HasPrefix(line, "EOC") {
-			break
-		}
-
-		mon = append(mon, line)
-	}
-	return strings.Join(mon, "\n"), nil
+	var s []string
+	s = append(s, poke.phrase)
+	inputs := balloon.ReadInput(s)
+	width := balloon.MaxWidth(inputs)
+	messages := balloon.SetPadding(inputs, width)
+	balloon := balloon.ConstructBalloon(messages, width)
+	return balloon + thoughts, nil
 }

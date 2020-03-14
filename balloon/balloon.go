@@ -1,4 +1,4 @@
-package ballon
+package balloon
 
 import (
 	"bufio"
@@ -11,13 +11,6 @@ import (
 )
 
 var columns int32
-var cows string
-
-func init() {
-	cows = `         \
-          \
-`
-}
 
 func ReadInput(args []string) []string {
 	var tmps []string
@@ -75,7 +68,7 @@ func SetPadding(msgs []string, width int) []string {
 	return ret
 }
 
-func ConstructBallon(msgs []string, width int) string {
+func ConstructBalloon(msgs []string, width int) string {
 	var borders []string
 	line := len(msgs)
 
@@ -107,5 +100,5 @@ func ConstructBallon(msgs []string, width int) string {
 	}
 
 	lines = append(lines, bottomBoder)
-	return strings.Join(lines, "\n")
+	return strings.Join(lines, "\n") + "\n"
 }
