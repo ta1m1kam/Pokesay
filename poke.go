@@ -15,6 +15,7 @@ func NewPoke(options ...Option) (*Poke, error) {
 	poke := &Poke{
 		phrase: "",
 		typ: "pokes/Pikachu.cow",
+		thinking: false,
 	}
 
 	for _, o := range options {
@@ -36,7 +37,7 @@ func Phrase(s string) Option {
 
 func Thinking() Option {
 	return func(poke *Poke) error {
-		poke.thinking = true
+		poke.thinking = false
 		return nil
 	}
 }

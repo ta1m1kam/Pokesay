@@ -1,6 +1,9 @@
 package pokesay
 
-import "strings"
+import (
+	"github.com/k0kubun/pp"
+	"strings"
+)
 
 func Say(options ...Option) (string, error) {
 	poke, err := NewPoke(options...)
@@ -22,6 +25,7 @@ func (poke *Poke) GetPoke(thoughts rune) (string, error) {
 		return "", err
 	}
 
+	pp.Print(poke)
 	if thoughts == 0 {
 		if poke.thinking {
 			thoughts = 'o'
@@ -31,9 +35,9 @@ func (poke *Poke) GetPoke(thoughts rune) (string, error) {
 	}
 
 	r := strings.NewReplacer(
-		//"\\\\", "\\",
-		//"\\@", "@",
-		//"\\$", "$",
+		"\\\\", "\\",
+		"\\@", "@",
+		"\\$", "$",
 		"$thoughts", string(thoughts),
 		"${thoughts}", string(thoughts),
 		)
