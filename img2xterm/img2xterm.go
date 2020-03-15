@@ -39,11 +39,11 @@ func Img2xterm(img image.Image) string {
 	width, height := bounds.Max.X, bounds.Max.Y
 	say := ""
 	for y := 0; y < height; y++ {
-		if y < 10 || y > 28 {
+		if y < 10 || y > 30 {
 			continue
 		}
 		for x := 0; x < width; x++ {
-			if x < 5 || x > 30 {
+			if x < 5 || x > 35 {
 				continue
 			}
 			if pixels[y][x].A == 0 {
