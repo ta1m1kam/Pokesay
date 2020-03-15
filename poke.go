@@ -69,16 +69,26 @@ func Type(s string) Option {
 }
 
 func containPokes(s string) (bool, error) {
-	imageFiles, err := assetFiles()
-	if err != nil {
-		return false, err
-	}
-	for _, image := range imageFiles {
-		if strings.Contains(s, image.Name()) {
+	for _, image := range AssetNames() {
+		if strings.Contains(s, image) {
 			return true, nil
 		}
 	}
 	return false, nil
+}
+
+func AssetNames() []string {
+	var assetNames []string
+	files, err := assetFiles()
+	if err != nil {
+		return nil
+	}
+
+	for _, file := range files {
+		assetNames = append(assetNames, file.Name())
+	}
+
+	return assetNames
 }
 
 func assetFiles() ([]os.FileInfo, error) {
