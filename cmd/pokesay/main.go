@@ -33,7 +33,6 @@ func main() {
 			if c.NArg() > 0 {
 				phrase = c.Args().Get(0)
 			} else if isPipe() {
-				fmt.Println("hoge")
 				phrase = pipeText()
 			}
 
