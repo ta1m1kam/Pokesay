@@ -53,16 +53,7 @@ func Thinking() Option {
 }
 
 func Type(s string) Option {
-	if s == "" {
-		s = "images/Pikachu.png"
-	}
-
-	if !strings.HasSuffix(s, ".png") {
-		s += ".png"
-	}
-	if !strings.HasPrefix(s, "pokes/") {
-		s = "images/" + s
-	}
+	s = complementFilePath(s)
 
 	return func(poke *Poke) error {
 		containPoke, err := containPokes(s)
@@ -97,4 +88,19 @@ func assetFiles() ([]os.FileInfo, error) {
 	}
 
 	return files, err
+}
+
+func complementFilePath(s string) string {
+	if s == "" {
+		s = "images/Pikachu.png"
+	}
+
+	if !strings.HasSuffix(s, ".png") {
+		s += ".png"
+	}
+	if !strings.HasPrefix(s, "pokes/") {
+		s = "images/" + s
+	}
+
+	return s
 }
