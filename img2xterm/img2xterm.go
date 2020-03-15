@@ -39,7 +39,7 @@ func Img2xterm(img image.Image) string {
 	width, height := bounds.Max.X, bounds.Max.Y
 	say := ""
 	for y := 0; y < height; y++ {
-		if y < 10 || y > 30 {
+		if y < 10 || y > 28 {
 			continue
 		}
 		for x := 0; x < width; x++ {
@@ -49,8 +49,8 @@ func Img2xterm(img image.Image) string {
 			if pixels[y][x].A == 0 {
 				say += "  "
 			} else {
-				c := color.RGB(uint8(pixels[y][x].R), uint8(pixels[y][x].R), uint8(pixels[y][x].R), true)
-				say += c.Sprint("　")
+				c := color.RGB(uint8(pixels[y][x].R), uint8(pixels[y][x].G), uint8(pixels[y][x].B), true)
+				say += c.Sprint("  ")
 			}
 		}
 		say += "\n"
