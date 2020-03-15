@@ -4,9 +4,7 @@
 
 # What's this?
 Everyone loves Pokemon!
-
 Everyone loves cowsay!
-
 This cli is combined Pokemon and cowsay!!
 
 # Demo
