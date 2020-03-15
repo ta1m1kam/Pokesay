@@ -47,7 +47,7 @@ func main() {
 				fmt.Print(say)
 			} else {
 				say, err := pokesay.Say(
-					pokesay.Random(),
+					pokesay.Phrase(phrase),
 					pokesay.Type(c.String("pokemon")),
 				)
 				if err != nil {
