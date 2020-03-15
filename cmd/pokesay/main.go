@@ -71,6 +71,7 @@ func isPipe() bool {
 	if err != nil {
 		panic(err)
 	}
+	fmt.Println(info.Size())
 	return info.Size() > 0
 }
 
