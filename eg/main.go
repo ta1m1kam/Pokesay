@@ -5,15 +5,14 @@ import (
 	"github.com/TaigaMikami/pokesay"
 )
 
-
 func main() {
 	simple()
 }
 
 func simple() {
 	say, err := pokesay.Say(
-		pokesay.Phrase("Hello"),
-		pokesay.Type("Bulbasaur"),
+		pokesay.Phrase("Hello\nWorld"),
+		pokesay.Type("Pikachu"),
 		pokesay.Thinking(),
 	)
 	if err != nil {
