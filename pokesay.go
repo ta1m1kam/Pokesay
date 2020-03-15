@@ -27,7 +27,7 @@ func Say(options ...Option) (string, error) {
 }
 
 func (poke *Poke) GetPoke() (string, error) {
-	file, _ := os.Open("images/Bulbasaur.png")
+	file, _ := os.Open(poke.typ)
 	img, _, err := image.Decode(file)
 	if err != nil {
 		return "", err

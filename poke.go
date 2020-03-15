@@ -2,6 +2,8 @@ package pokesay
 
 import (
 	"github.com/pkg/errors"
+	"io/ioutil"
+	"os"
 	"strings"
 )
 
@@ -14,7 +16,7 @@ type Poke struct {
 func NewPoke(options ...Option) (*Poke, error) {
 	poke := &Poke{
 		phrase: "",
-		typ: "pokes/Pikachu.png",
+		typ: "images/Pikachu.png",
 	}
 
 	for _, o := range options {
@@ -54,7 +56,11 @@ func Type(s string) Option {
 	}
 
 	return func(poke *Poke) error {
-		if containPokes(s) {
+		containPoke, err := containPokes(s)
+		if err != nil {
+			return err
+		}
+		if containPoke {
 			poke.typ = s
 			return nil
 		}
@@ -62,15 +68,24 @@ func Type(s string) Option {
 	}
 }
 
-func containPokes(s string) bool {
-	return true
+func containPokes(s string) (bool, error) {
+	imageFiles, err := assetFiles()
+	if err != nil {
+		return false, err
+	}
+	for _, image := range imageFiles {
+		if strings.Contains(s, image.Name()) {
+			return true, nil
+		}
+	}
+	return false, nil
 }
 
-//func containPokes(s string) bool {
-//	for _, poke := range AssetNames() {
-//		if s == poke {
-//			return true
-//		}
-//	}
-//	return false
-//}
+func assetFiles() ([]os.FileInfo, error) {
+	files, err := ioutil.ReadDir("images")
+	if err != nil {
+		return nil, err
+	}
+
+	return files, err
+}
