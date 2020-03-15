@@ -24,6 +24,7 @@ require (
 	github.com/pkg/errors v0.9.1
 	github.com/rakyll/statik v0.1.7 // indirect
 	github.com/soniakeys/quant v1.0.0 // indirect
+	github.com/urfave/cli/v2 v2.2.0 // indirect
 	golang.org/x/image v0.0.0-20200119044424-58c23975cae1 // indirect
 	golang.org/x/tour v0.0.0-20200201212631-8f38c9a8d074 // indirect
 )
