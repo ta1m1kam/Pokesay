@@ -6,7 +6,9 @@ Everyone loves cowsay!
 This cli is combined Pokemon and cowsay!!
 
 # Demo
-![demo](https://github.com/TaigaMikami/Pokesay/blob/master/images/demo/pokesay-demo.gif?raw=true)
+<div align="center">
+  <img src="https://github.com/TaigaMikami/Pokesay/blob/master/images/demo/pokesay-demo.gif?raw=true">
+</div>
 
 # Usage
 ```
