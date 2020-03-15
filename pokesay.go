@@ -1,8 +1,8 @@
 package pokesay
 
 import (
-	"github.com/TaigaMikami/pokesay/balloon"
-	"github.com/TaigaMikami/pokesay/img2xterm"
+	"github.com/TaigaMikami/Pokesay/balloon"
+	"github.com/TaigaMikami/Pokesay/img2xterm"
 	"image"
 	"math/rand"
 	"os"

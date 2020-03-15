@@ -3,7 +3,7 @@ package main
 import (
 	"bufio"
 	"fmt"
-	"github.com/TaigaMikami/pokesay"
+	pokesay "github.com/TaigaMikami/Pokesay"
 	"io"
 	"log"
 	"os"
