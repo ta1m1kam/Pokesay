@@ -87,7 +87,7 @@ func (poke *Poke) GetBalloon() (string, error) {
 }
 
 func pickPoke() string {
-	pokes := AssetNames()
+	pokes := PokemonNames()
 	n := len(pokes)
 	return pokes[rand.Intn(n)]
 }
