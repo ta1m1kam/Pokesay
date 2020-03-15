@@ -16,7 +16,7 @@ type Poke struct {
 func NewPoke(options ...Option) (*Poke, error) {
 	poke := &Poke{
 		phrase: "",
-		typ: "images/Pikachu.png",
+		typ: "https://raw.githubusercontent.com/TaigaMikami/Pokesay/master/images/Pikachu.png",
 	}
 
 	for _, o := range options {
@@ -108,8 +108,8 @@ func complementFilePath(s string) string {
 	if !strings.HasSuffix(s, ".png") {
 		s += ".png"
 	}
-	if !strings.HasPrefix(s, "pokes/") {
-		s = "images/" + s
+	if !strings.HasPrefix(s, "https://raw.githubusercontent.com/TaigaMikami/Pokesay/master/images/") {
+		s = "https://raw.githubusercontent.com/TaigaMikami/Pokesay/master/images/" + s
 	}
 
 	return s
