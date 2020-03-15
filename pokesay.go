@@ -1,11 +1,13 @@
 package pokesay
 
 import (
+	"bytes"
 	"github.com/TaigaMikami/Pokesay/balloon"
 	"github.com/TaigaMikami/Pokesay/img2xterm"
 	"image"
+	"io/ioutil"
 	"math/rand"
-	"os"
+	"net/http"
 	"time"
 )
 
@@ -19,7 +21,8 @@ func Say(options ...Option) (string, error) {
 		return "", err
 	}
 
-	pokemon, err := poke.GetPoke()
+	//pokemon, err := poke.GetPoke()
+	pokemon, err := poke.GetPokeWeb()
 	if err != nil {
 		return "", err
 	}
@@ -32,9 +35,29 @@ func Say(options ...Option) (string, error) {
 	return balloon + pokemon, nil
 }
 
-func (poke *Poke) GetPoke() (string, error) {
-	file, _ := os.Open(poke.typ)
-	img, _, err := image.Decode(file)
+//func (poke *Poke) GetPoke() (string, error) {
+//	file, _ := os.Open(poke.typ)
+//	img, _, err := image.Decode(file)
+//	if err != nil {
+//		return "", err
+//	}
+//	pokemon := img2xterm.Img2xterm(img)
+//	return pokemon, nil
+//}
+
+func (poke *Poke)GetPokeWeb() (string, error) {
+	resp, err := http.Get(poke.typ)
+	if err != nil {
+		return "", err
+	}
+	defer resp.Body.Close()
+
+	b, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		return "", err
+	}
+
+	img, _, err := image.Decode(bytes.NewReader(b))
 	if err != nil {
 		return "", err
 	}
