@@ -4,8 +4,14 @@ import (
 	"github.com/TaigaMikami/pokesay/balloon"
 	"github.com/TaigaMikami/pokesay/img2xterm"
 	"image"
+	"math/rand"
 	"os"
+	"time"
 )
+
+func init() {
+	rand.Seed(time.Now().UTC().UnixNano())
+}
 
 func Say(options ...Option) (string, error) {
 	poke, err := NewPoke(options...)
@@ -55,4 +61,10 @@ func (poke *Poke) GetBalloon() (string, error) {
 	messages := balloon.SetPadding(inputs, width)
 	balloon := balloon.ConstructBalloon(messages, width)
 	return balloon + thoughts, nil
+}
+
+func pickPoke() string {
+	pokes := AssetNames()
+	n := len(pokes)
+	return pokes[rand.Intn(n)]
 }

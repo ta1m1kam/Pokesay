@@ -29,6 +29,15 @@ func NewPoke(options ...Option) (*Poke, error) {
 
 type Option func(*Poke) error
 
+func Random() Option {
+	return func(poke *Poke) error {
+		s := pickPoke()
+		s = complementFilePath(s)
+		poke.typ = s
+		return nil
+	}
+}
+
 func Phrase(s string) Option {
 	return func(poke *Poke) error {
 		poke.phrase = s
